@@ -1,0 +1,26 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<div class="row">
+	<div class="col-md-8 offset-md-2 text-justify">
+		{% for post in object_list %}
+		<div class="mt-5">
+			<div class="float-right">
+				<a href="{% url 'core:post_update' pk=post.pk %}">
+					<i class="fa fa-pencil-alt"></i>
+				</a>
+				<a href="{% url 'core:post_delete' pk=post.pk %}">
+					<i class="fa fa-trash-alt"></i>
+				</a>
+			</div>
+			<a href="{% url 'core:post_detail' pk=post.pk %}">
+				<h4 class="font-weight-bold ">{{post.title}}</h4>
+			</a>
+			
+			<small>{{post.author.first_name}} - {{post.created_at}}</small>
+			<h6>{{post.text|truncatechars:150}}</h6>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
